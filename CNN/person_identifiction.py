@@ -112,7 +112,7 @@ width_shift_range = 0.1, height_shift_range = 0.1)
 #make an early stooping for the model after 50 times according to the state of val_loss
 stop = tf.keras.callbacks.EarlyStopping(
             monitor="val_loss",
-            patience=50,
+            patience=10,
             verbose=1,
             mode="auto")
 
@@ -142,12 +142,8 @@ loss ,acc = axes
 
 loss.plot(Model.history['loss'], label='Train loss')
 loss.plot(Model.history['val_loss'], label='Test loss')
-loss.ylabel('Accuracy')
-loss.xlabel('Epoch')
 loss.legend()
 acc.plot(Model.history['acc'], label='Train acc')
 acc.plot(Model.history['val_acc'], label='Test acc')
-acc.ylabel('Accuracy')
-acc.xlabel('Epoch')
 acc.legend()
 plt.show()

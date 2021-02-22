@@ -125,7 +125,7 @@ width_shift_range = 0.1, height_shift_range = 0.1)
 #make an early stooping for the model after 25 time according to the state of val_loss
 stop = tf.keras.callbacks.EarlyStopping(
     monitor="val_loss",
-    patience=25,
+    patience=10,
     verbose=1,
     mode="auto")
 
@@ -148,20 +148,15 @@ print('Train: %.3f, Test: %.3f' % (train_acc, test_acc))
 
 # Testing the best model on completely new segment of data.
 score_gender = Load_model.evaluate(X_val, Y_val, verbose=0)
-print("Model validation(%s): %.2f%%" % (Load_model.metrics_names[1], score_personal[1]*100))
+print("Model validation(%s): %.2f%%" % (Load_model.metrics_names[1], score_gender[1]*100))
 
 # Plotting The training and testing Loss and acuraccy.
 fig, axes = plt.subplots(2, 1, constrained_layout=True)
 loss ,acc = axes
-
 loss.plot(Model.history['loss'], label='Train loss')
 loss.plot(Model.history['val_loss'], label='Test loss')
-loss.ylabel('Loss')
-loss.xlabel('Epoch')
 loss.legend()
 acc.plot(Model.history['acc'], label='Train acc')
 acc.plot(Model.history['val_acc'], label='Test acc')
-acc.ylabel('Accuracy')
-acc.xlabel('Epoch')
 acc.legend()
 plt.show()
